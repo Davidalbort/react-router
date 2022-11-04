@@ -9,13 +9,13 @@ blogData.push({
   title: 'Que es vue',
   slug: 'que-es-vue',
   content: 'vue es el mejor framework de JavaScript',
-  author: 'juanDc'
+  author: 'diana'
 })
 blogData.push({
   title: 'Que es angular',
   slug: 'que-es-angular',
   content: 'angular es el mejor framework de JavaScript',
-  author: 'juanDc'
+  author: 'nico'
 })
 
 interface HomePageStore {

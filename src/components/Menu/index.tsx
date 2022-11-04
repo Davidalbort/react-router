@@ -1,18 +1,23 @@
 import { Link } from 'react-router-dom';
+import { menu } from '../../data/menuData';
+import { useAuth } from '../../hooks/useAuth';
 
 const Menu = () => {
+  const auth = useAuth();
   return(
     <nav>
       <ul>
-        <li>
-          <Link to='/'>Home</Link>
-        </li>
-        <li>
-          <Link to='/blog'>Blog</Link>
-        </li>
-        <li>
-          <Link to='/profile'>Profile</Link>
-        </li>
+        {menu.map( item => {
+          if(item?.privateOnly && auth?.user) return null
+          if(item.private && !auth?.user) return null
+          return (
+            <li key={item.name}>
+              <Link to={item.to}>
+                {item.name}
+              </Link>
+            </li>
+          )
+        })}
       </ul>
     </nav>
   )
