@@ -19,7 +19,6 @@ function App() {
     <>
       <HashRouter>
         <AuthProvider>
-          <Menu />
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/blog' element={<BlogPage />} />
