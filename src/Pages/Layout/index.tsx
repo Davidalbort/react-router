@@ -35,25 +35,33 @@ const TODO_DEFAULT : TodoDefault = [
 ]
 const Layout = () => {
 	const [valueSearch,setSearch]=useState<StateLayout["inputValue"]>("")
+	const [alls, setAlls]=useState<TodoDefault>(TODO_DEFAULT)
 	const handleSearch: StateLayout["handleSearch"] = (event) => {
 		setSearch(event.target.value)
 	}
 	console.log(valueSearch)
-	const filterAll = (inputSearch:StateLayout["inputValue"],TODO_DEFAULT:TodoDefault):TodoDefault => {
+	const filterAll = (inputSearch:StateLayout["inputValue"],alls:TodoDefault):TodoDefault => {
 		const textSearch = inputSearch.toLowerCase()
-		let newAll: TodoDefault = []
+		let newAlls: TodoDefault = []
 		if(!textSearch){
-			newAll= TODO_DEFAULT
+			newAlls= alls
 		}else{
-			newAll= TODO_DEFAULT.filter((product) =>{
+			newAlls= alls.filter((product) =>{
 				return product.text.toLocaleLowerCase().includes(valueSearch)
 			})
 		}
-		return newAll
+		return newAlls
 	}
-	const allSearch =filterAll(valueSearch,TODO_DEFAULT)
+	const allSearch =filterAll(valueSearch,alls)
 	const completedAll = (product:string):void => {
-		alert(product)
+		const indexAll= alls.findIndex(all => (all.text=== product))
+		const changeAll = [...alls]
+		changeAll[indexAll].completed=true
+		setAlls(changeAll)
+	}
+	const deleteAll = (product:string):void => {
+		const changeAll= alls.filter(all => all.text !== product)
+		setAlls(changeAll)
 	}
 	return (
 		<>
@@ -68,6 +76,7 @@ const Layout = () => {
 			<AllItems 
 				products={allSearch}
 				completed={completedAll}
+				deleted={deleteAll}
 			/>
 		</>
 	)

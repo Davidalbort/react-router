@@ -4,9 +4,10 @@ import { Item } from "../Items"
 interface PropsAllItems {
   products: TodoDefault
   completed: (text:string) => void
+  deleted: (text:string) => void
 }
 
-const AllItems = ({products,completed}:PropsAllItems) => {
+const AllItems = ({products,completed,deleted}:PropsAllItems) => {
 	return(
 		<main>
 			<ul>
@@ -17,6 +18,7 @@ const AllItems = ({products,completed}:PropsAllItems) => {
 							allText={product.text}
 							completed={product.completed}
 							handleCompleted={(() => completed(product.text))}
+							handleDeleted={() => deleted(product.text)}
 						/>
 
 					))

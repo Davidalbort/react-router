@@ -5,9 +5,10 @@ interface PropsItem {
   allText: string
   completed: boolean
   handleCompleted: () => void
+  handleDeleted: () => void
 }
 
-const Item = ({allText,completed,handleCompleted}:PropsItem) => {
+const Item = ({allText,completed,handleCompleted,handleDeleted}:PropsItem) => {
  
 	return(
 		<li className="flex justify-between items-center px-2 w-auto h-6 bg-slate-500 mb-1">
@@ -20,6 +21,7 @@ const Item = ({allText,completed,handleCompleted}:PropsItem) => {
 			</p>
 			<AiOutlineDelete
 				className={ "text-red-600 cursor-pointer"}
+				onClick={handleDeleted}
 			/>
 
 
